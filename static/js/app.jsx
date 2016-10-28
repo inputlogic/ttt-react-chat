@@ -36,10 +36,26 @@ class Messenger extends React.Component {
     super(props);
     this.handleMessage = this.handleMessage.bind(this);
     this.state = {messages: ['Hello? Type something already!']}
+    this.ws = new WebSocket("ws://localhost:3000");
   }
-
+
   handleMessage(message) {
     this.setState({messages: [...this.state.messages, message]});
+    this.ws.send(message);
+  }
+
+  receiveMessage() {
+
+  }
+
+  componentDidMount() {
+    // ws.receive(
+    var self = this;
+    self.ws.onmessage = function(msg) {
+      self.setState({messages: [...self.state.messages, msg.data]});
+      console.log(msg);
+      // this.handleMessage(message)
+    };
   }
 
   render() {
