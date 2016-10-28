@@ -7,46 +7,54 @@ class Message extends React.Component {
   }
 }
 
+
 class MessageInput extends React.Component {
   constructor(props) {
     super(props);
-  }
-  static propTypes = {
-    onTextChange: React.PropTypes.func.isRequired
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
-  textChange() {
-    console.log("hereerererere");
+  onSubmit(e) {
+    e.preventDefault();
+    let message = this.refs.textField.value;
+    this.props.messageHandler(message);
   }
 
   render() {
     return (
-      <input type="text" onChange={this.textChange}/>
+      <form onSubmit={this.onSubmit}>
+        <input type="text" ref="textField" />
+      </form>
     );
   }
 }
 
+
 class Messenger extends React.Component {
-  onTextChange() {
-    console.log("text changed");
+  handleMessage(message) {
+    console.log('handling message: ' + message);
   }
+
   render() {
     let messages = [
       "hi there",
       "hello",
       "what's up",
     ];
+
     let messageList = messages.map((message, index) => {
       return <Message message={message} key={index} />
     });
+
     return (
       <div>
        <ul> {messageList} </ul>
-        <MessageInput onTextChange={this.onTextChange} />
+        <MessageInput messageHandler={this.handleMessage} />
       </div>
     )
   }
 }
+
 
 ReactDOM.render(
   <Messenger />,
