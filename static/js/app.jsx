@@ -16,8 +16,7 @@ class MessageInput extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    let message = this.refs.textField.value;
-    this.props.messageHandler(message);
+    this.props.messageHandler(this.refs.textField.value);
   }
 
   render() {
