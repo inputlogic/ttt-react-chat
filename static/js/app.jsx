@@ -31,14 +31,16 @@ class MessageInput extends React.Component {
 }
 
 
-var Messenger = React.createClass({
-  getInitialState() {
-    return {messages: ['Hello? Type something already!']}
-  },
+class Messenger extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleMessage = this.handleMessage.bind(this);
+    this.state = {messages: ['Hello? Type something already!']}
+  }
 
   handleMessage(message) {
-    this.setState({ messages: [...this.state.messages, message]});
-  },
+    this.setState({messages: [...this.state.messages, message]});
+  }
 
   render() {
     let messageList = this.state.messages.map((message, index) => {
@@ -52,7 +54,7 @@ var Messenger = React.createClass({
       </div>
     )
   }
-})
+}
 
 
 ReactDOM.render(
