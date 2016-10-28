@@ -2,7 +2,7 @@
 class Message extends React.Component {
   render() {
     return (
-      <li>{this.props.message}</li>
+      <li>{ this.props.message }</li>
     )
   }
 }
@@ -16,43 +16,43 @@ class MessageInput extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.messageHandler(this.refs.textField.value);
+    let target = this.refs.textField;
+    this.props.messageHandler(target.value);
+    target.value = '';
   }
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={ this.onSubmit }>
         <input type="text" ref="textField" />
       </form>
-    );
+    )
   }
 }
 
 
-class Messenger extends React.Component {
+var Messenger = React.createClass({
+  getInitialState() {
+    return {messages: ['Hello? Type something already!']}
+  },
+
   handleMessage(message) {
-    console.log('handling message: ' + message);
-  }
+    this.setState({ messages: [...this.state.messages, message]});
+  },
 
   render() {
-    let messages = [
-      "hi there",
-      "hello",
-      "what's up",
-    ];
-
-    let messageList = messages.map((message, index) => {
-      return <Message message={message} key={index} />
+    let messageList = this.state.messages.map((message, index) => {
+      return <Message message={ message } key={ index } />
     });
 
     return (
       <div>
-       <ul> {messageList} </ul>
-        <MessageInput messageHandler={this.handleMessage} />
+       <ul>{ messageList }</ul>
+        <MessageInput messageHandler={ this.handleMessage } />
       </div>
     )
   }
-}
+})
 
 
 ReactDOM.render(
