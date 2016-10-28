@@ -1,0 +1,23 @@
+{
+  "name": "ttt-react-chat",
+  "version": "1.0.0",
+  "description": "Exploring building a pure React (no Redux) chat client w/ websockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inputlogic/ttt-react-chat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inputlogic/ttt-react-chat/issues"
+  },
+  "homepage": "https://github.com/inputlogic/ttt-react-chat#readme",
+  "dependencies": {
+    "nodejs-websocket": "^1.7.0"
+  }
+}
