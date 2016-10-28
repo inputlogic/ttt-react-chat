@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/inputlogic/ttt-react-chat#readme",
   "dependencies": {
-    "nodejs-websocket": "^1.7.0"
+    "express": "^4.14.0",
+    "express-ws": "^2.0.0"
   }
 }

@@ -1,13 +1,13 @@
-var ws = require("nodejs-websocket")
+var express = require("express");
+var app = express();
+var expressWs = require('express-ws')(app);
 
-// Scream server example: "hi" -> "HI!!!"
-var server = ws.createServer(function (conn) {
-    console.log("New connection")
-    conn.on("text", function (str) {
-        console.log("Received "+str)
-        conn.sendText(str.toUpperCase()+"!!!")
-    })
-    conn.on("close", function (code, reason) {
-        console.log("Connection closed")
-    })
-}).listen(8001)
+app.use(express.static('static'));
+
+app.ws('/echo', function(ws, req) {
+  ws.on('message', function(msg) {
+    ws.send(msg);
+  });
+});
+
+app.listen(3000);
