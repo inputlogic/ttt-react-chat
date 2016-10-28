@@ -1,13 +1,23 @@
-var express = require("express");
+var express = require('express');
 var app = express();
-var expressWs = require('express-ws')(app);
+require('express-ws')(app);
 
-app.use(express.static('static'));
+app.use(function (req, res, next) {
+  console.log('middleware');
+  req.testing = 'testing';
+  return next();
+});
 
-app.ws('/echo', function(ws, req) {
+app.get('/', function(req, res, next){
+  console.log('get route', req.testing);
+  res.end();
+});
+
+app.ws('/', function(ws, req) {
   ws.on('message', function(msg) {
-    ws.send(msg);
+    console.log(msg);
   });
+  console.log('socket', req.testing);
 });
 
 app.listen(3000);
